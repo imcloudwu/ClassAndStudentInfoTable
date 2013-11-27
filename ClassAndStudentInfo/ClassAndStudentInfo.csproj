@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="Aspose.Cells">
       <HintPath>..\..\..\..\ischool desktop\modules\Campus\Aspose.Cells.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="DevComponents.DotNetBar2, Version=9.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="FISCA">
@@ -52,7 +53,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.UDT">
-      <HintPath>..\..\..\Documents and Settings\Dylan.Huang\桌面\ischool desktop\kernel\FISCA.UDT.dll</HintPath>
+      <HintPath>..\..\..\..\ischool desktop\kernel\FISCA.UDT.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="K12.Data">
@@ -60,11 +61,12 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="K12.Presentation">
-      <HintPath>..\..\..\Documents and Settings\Dylan.Huang\桌面\ischool desktop\modules\SHSchoolLoader\K12.Presentation.dll</HintPath>
+      <HintPath>..\..\..\..\ischool desktop\modules\SHSchoolLoader\K12.Presentation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SHSchool.Data">
       <HintPath>..\..\..\..\ischool desktop\modules\SHSchoolLoader\SHSchool.Data.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
