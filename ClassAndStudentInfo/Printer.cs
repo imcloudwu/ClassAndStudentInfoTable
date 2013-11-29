@@ -553,9 +553,10 @@ namespace ClassAndStudentInfo
         //取得上學年畢業生物件清單
         private List<GraduateStudentObj> getGraduateStudent()
         {
+            int year = Convert.ToInt32(_SchoolYear)-1; //當前系統學年度-1
             List<GraduateStudentObj> list = new List<GraduateStudentObj>();
             FISCA.Data.QueryHelper _Q = new FISCA.Data.QueryHelper();
-            DataTable dt = _Q.Select("select ref_student_id,ss_name,ss_gender,ss_dept from update_record where update_code='501' and school_year='" + _SchoolYear + "'");
+            DataTable dt = _Q.Select("select ref_student_id,ss_name,ss_gender,ss_dept from update_record where update_code='501' and school_year='" + year + "'");
 
             foreach (DataRow row in dt.Rows)
             {
