@@ -15,7 +15,7 @@ using FISCA.Data;
 
 namespace ClassAndStudentInfo
 {
-    public partial class Form1 : BaseForm
+    class Printer
     {
         String _SchoolYear; //當前學年度
         private List<StudentObj> _ErrorList, _CorrectList;
@@ -26,25 +26,17 @@ namespace ClassAndStudentInfo
         private BackgroundWorker _BGWClassStudentAbsenceDetail; //背景模式
         Workbook _Wk;
 
-        public Form1()
+        public void Start()
         {
-            InitializeComponent();
-        }
-
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            this.btnPrint.Enabled = false;
             FISCA.Presentation.MotherForm.SetStatusBarMessage("正在產生班級及學生概況統計表...");
             _BGWClassStudentAbsenceDetail = new BackgroundWorker();
             _BGWClassStudentAbsenceDetail.DoWork += new DoWorkEventHandler(_BGWClassStudentAbsenceDetail_DoWork);
             _BGWClassStudentAbsenceDetail.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_BGWClassStudentAbsenceDetail_Completed);
             _BGWClassStudentAbsenceDetail.RunWorkerAsync();
-
         }
 
         private void _BGWClassStudentAbsenceDetail_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.btnPrint.Enabled = true;
             FISCA.Presentation.MotherForm.SetStatusBarMessage("產生 班級及學生概況統計表 已完成");
             SaveFileDialog sd = new System.Windows.Forms.SaveFileDialog();
             sd.Title = "另存新檔";
@@ -65,7 +57,6 @@ namespace ClassAndStudentInfo
                 catch
                 {
                     FISCA.Presentation.Controls.MsgBox.Show("指定路徑無法存取。", "建立檔案失敗", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                    this.Enabled = true;
                     return;
                 }
             }
@@ -97,11 +88,6 @@ namespace ClassAndStudentInfo
 
             //資料列印           
             Export();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         //科別分類,key=科別名稱,value=學生物件清單
@@ -526,9 +512,9 @@ namespace ClassAndStudentInfo
         private int getReStudentCount(String deptName)
         {
             int count = 0;
-            foreach(ReStudentObj student in _ReStudentList)
+            foreach (ReStudentObj student in _ReStudentList)
             {
-                if(student.科別.Contains(deptName))
+                if (student.科別.Contains(deptName))
                 {
                     count++;
                 }
@@ -537,7 +523,7 @@ namespace ClassAndStudentInfo
         }
 
         //取得指定科別及性別的重讀生數量
-        private int getReStudentCount(String deptName,String gender)
+        private int getReStudentCount(String deptName, String gender)
         {
             int count = 0;
             foreach (ReStudentObj student in _ReStudentList)
@@ -583,7 +569,7 @@ namespace ClassAndStudentInfo
         {
             List<ReStudentObj> list = new List<ReStudentObj>();
             FISCA.Data.QueryHelper _Q = new FISCA.Data.QueryHelper();
-            DataTable dt = _Q.Select("select ref_student_id,ss_name,ss_gender,ss_grade_year,ss_dept from update_record where school_year='"+ _SchoolYear +"' and update_desc like '%重讀%'");
+            DataTable dt = _Q.Select("select ref_student_id,ss_name,ss_gender,ss_grade_year,ss_dept from update_record where school_year='" + _SchoolYear + "' and update_desc like '%重讀%'");
 
             foreach (DataRow row in dt.Rows)
             {
@@ -591,6 +577,5 @@ namespace ClassAndStudentInfo
             }
             return list;
         }
-
     }
 }

@@ -20,9 +20,9 @@ namespace ClassAndStudentInfo
             item1["報表"]["班級及學生概況1"].Enable = Permissions.班級及學生概況1權限;
             item1["報表"]["班級及學生概況1"].Click += delegate
             {
-                Form1 form = new Form1();
-                form.ShowDialog();
-            };  
+                Printer printer = new Printer();
+                printer.Start();
+            };
 
             //權限設定
             Catalog permission = RoleAclSource.Instance["教務作業"]["功能按鈕"];
